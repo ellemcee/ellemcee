@@ -1,0 +1,77 @@
+#
+# Usage:
+# Copy this htaccess file into the webroot for your site
+#
+# Rename the file to ".htaccess" (no extension after the file name)
+#
+# Once loaded up to your site, uncomment any rules below to enable them on your site...
+#
+
+
+# Enable Rewrite Engine - (you'll want this)
+# ------------------------------
+RewriteEngine On
+RewriteBase /
+
+
+
+# Redirect non-www to www
+# ------------------------------------
+#RewriteCond %{HTTP_HOST} !^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+
+
+# Redirect www to non-www
+# ------------------------------------
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+
+
+# Standard ExpressionEngine Rewrite - (you'll want this)
+#
+# OS X Users / Machines
+#
+# ------------------------------
+#RewriteCond $1 !\.(css|js|gif|jpe?g|png) [NC]
+#RewriteCond $1 !\.(gif|jpe?g|png)$ [NC]
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+
+
+# Standard ExpressionEngine Rewrite - (you'll want this)
+#
+# Linux Users / Machines
+#
+# ------------------------------
+RewriteCond $1 !\.(css|js|gif|jpe?g|png) [NC]
+RewriteCond $1 !\.(gif|jpe?g|png)$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+
+
+# Override default PHP settings - useful if you start exceeding memory limits
+# and/or if file uploads are failing due to file size
+# ------------------------------
+#<IfModule mod_php5.c>
+#php_value memory_limit 900M
+#php_value post_max_size 60M
+#php_value upload_max_filesize 30M
+#</IfModule>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
