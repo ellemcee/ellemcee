@@ -1,0 +1,8 @@
+h1 {
+  color: red; }
+  h1.test {
+    color: yellow; }
+  h1.other {
+    color: black; }
+
+
